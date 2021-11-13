@@ -1,61 +1,70 @@
 package sesame.workshop.sesame.workshop.entitie;
 
+import java.io.Serializable;
+import java.util.Collection;
 import java.util.Objects;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
-
-import org.aspectj.apache.bcel.classfile.Code;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
-@Table
-public class Employe {
+public class Employe implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codeEmploye;
+	private Long codeEmployeLong;
 	
-	@Column()
-	private String nomEmploye ;
+	private String nomEmployeString;
+	
+	@ManyToOne
+	@JoinColumn(name = "Code_emp_sup")
+	private Employe employesSup;
+	
+	@ManyToMany
+	@JoinTable(name = "Emp_Gr", joinColumns = @JoinColumn(name = "Nump_EMP"), inverseJoinColumns= @JoinColumn())
+	private Collection<Group> groupes;
 
-	public Employe(Long codeEmploye, String nomEmploye) {
-		super();
-		this.codeEmploye = codeEmploye;
-		this.nomEmploye = nomEmploye;
+	public Long getCodeEmployeLong() {
+		return codeEmployeLong;
 	}
 
-	public Employe() {
-		super();
+	public void setCodeEmployeLong(Long codeEmployeLong) {
+		this.codeEmployeLong = codeEmployeLong;
 	}
 
-	public Long getCodeEmploye() {
-		return codeEmploye;
+	public String getNomEmployeString() {
+		return nomEmployeString;
 	}
 
-	public void setCodeEmploye(Long codeEmploye) {
-		this.codeEmploye = codeEmploye;
+	public void setNomEmployeString(String nomEmployeString) {
+		this.nomEmployeString = nomEmployeString;
 	}
 
-	public String getNomEmploye() {
-		return nomEmploye;
+	public Employe getEmployesSup() {
+		return employesSup;
 	}
 
-	public void setNomEmploye(String nomEmploye) {
-		this.nomEmploye = nomEmploye;
+	public void setEmployesSup(Employe employesSup) {
+		this.employesSup = employesSup;
 	}
 
-	@Override
-	public String toString() {
-		return "Employe [codeEmploye=" + codeEmploye + ", nomEmploye=" + nomEmploye + "]";
+	public Collection<Group> getGroups() {
+		return groupes;
+	}
+
+	public void setGroups(Collection<Group> groups) {
+		this.groupes = groups;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(codeEmploye, nomEmploye);
+		return Objects.hash(codeEmployeLong, employesSup, groupes, nomEmployeString);
 	}
 
 	@Override
@@ -67,8 +76,17 @@ public class Employe {
 		if (getClass() != obj.getClass())
 			return false;
 		Employe other = (Employe) obj;
-		return Objects.equals(codeEmploye, other.codeEmploye) && Objects.equals(nomEmploye, other.nomEmploye);
+		return Objects.equals(codeEmployeLong, other.codeEmployeLong) && Objects.equals(employesSup, other.employesSup)
+				&& Objects.equals(groupes, other.groupes) && Objects.equals(nomEmployeString, other.nomEmployeString);
 	}
+
+	@Override
+	public String toString() {
+		return "Employe [codeEmployeLong=" + codeEmployeLong + ", nomEmployeString=" + nomEmployeString
+				+ ", employesSup=" + employesSup + ", groups=" + groupes + "]";
+	}
+
+	
 	
 	
 	

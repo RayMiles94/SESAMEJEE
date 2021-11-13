@@ -1,61 +1,70 @@
 package sesame.workshop.sesame.workshop.entitie;
 
-
-
+import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Objects;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity()
-@Table()
-public class Compte {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "Type_CRT", discriminatorType = DiscriminatorType.STRING, length = 2)
+public abstract class Compte implements Serializable {
 	
 	
-	public Compte() {
-		super();
-	}
 
-	public Compte(Long id, String numCompte, Date dateCreationDate, double solde) {
-		super();
-		this.id = id;
-		this.numCompte = numCompte;
-		this.dateCreationDate = dateCreationDate;
-		this.solde = solde;
-	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long codeCompte;
 	
-	@Column()
-	private String numCompte;
-
-	@Column()
-	private Date dateCreationDate; 
+	@Column
+	private String dateCreation;
 	
-	@Column()
+	@Column
+	private Date dateCreationDate;
+	
+	@Column
 	private double solde;
+	
+	@ManyToOne
+	@JoinColumn(name = "Code_Cli")
+	private Client client;
 
-	public Long getId() {
-		return id;
+	@ManyToOne
+	@JoinColumn(name= "Code_Emp")
+	private Employe employe;
+	
+	@OneToMany(mappedBy = "compte")
+	private Collection<Operation> operations;
+
+	public Long getCodeCompte() {
+		return codeCompte;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setCodeCompte(Long codeCompte) {
+		this.codeCompte = codeCompte;
 	}
 
-	public String getNumCompte() {
-		return numCompte;
+	public String getDateCreation() {
+		return dateCreation;
 	}
 
-	public void setNumCompte(String numCompte) {
-		this.numCompte = numCompte;
+	public void setDateCreation(String dateCreation) {
+		this.dateCreation = dateCreation;
 	}
 
 	public Date getDateCreationDate() {
@@ -74,30 +83,56 @@ public class Compte {
 		this.solde = solde;
 	}
 
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public Employe getEmploye() {
+		return employe;
+	}
+
+	public void setEmploye(Employe employe) {
+		this.employe = employe;
+	}
+
+	public Collection<Operation> getOperations() {
+		return operations;
+	}
+
+	public void setOperations(Collection<Operation> operations) {
+		this.operations = operations;
+	}
+
 	@Override
 	public String toString() {
-		return "Compte [id=" + id + ", numCompte=" + numCompte + ", dateCreationDate=" + dateCreationDate + ", solde="
-				+ solde + "]";
+		return "Compte [codeCompte=" + codeCompte + ", dateCreation=" + dateCreation + ", dateCreationDate="
+				+ dateCreationDate + ", solde=" + solde + ", client=" + client + ", employe=" + employe
+				+ ", operations=" + operations + "]";
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(dateCreationDate, id, numCompte, solde);
+	public Compte() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Compte other = (Compte) obj;
-		return Objects.equals(dateCreationDate, other.dateCreationDate) && Objects.equals(id, other.id)
-				&& Objects.equals(numCompte, other.numCompte)
-				&& Double.doubleToLongBits(solde) == Double.doubleToLongBits(other.solde);
+	public Compte(Long codeCompte, String dateCreation, Date dateCreationDate, double solde, Client client,
+			Employe employe, Collection<Operation> operations) {
+		super();
+		this.codeCompte = codeCompte;
+		this.dateCreation = dateCreation;
+		this.dateCreationDate = dateCreationDate;
+		this.solde = solde;
+		this.client = client;
+		this.employe = employe;
+		this.operations = operations;
 	}
+	
+	
+
 	
 	
 }
