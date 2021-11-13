@@ -17,8 +17,18 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@NoArgsConstructor
+@Data
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode
 @Entity()
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "Type_CRT", discriminatorType = DiscriminatorType.STRING, length = 2)
@@ -50,88 +60,6 @@ public abstract class Compte implements Serializable {
 	
 	@OneToMany(mappedBy = "compte")
 	private Collection<Operation> operations;
-
-	public Long getCodeCompte() {
-		return codeCompte;
-	}
-
-	public void setCodeCompte(Long codeCompte) {
-		this.codeCompte = codeCompte;
-	}
-
-	public String getDateCreation() {
-		return dateCreation;
-	}
-
-	public void setDateCreation(String dateCreation) {
-		this.dateCreation = dateCreation;
-	}
-
-	public Date getDateCreationDate() {
-		return dateCreationDate;
-	}
-
-	public void setDateCreationDate(Date dateCreationDate) {
-		this.dateCreationDate = dateCreationDate;
-	}
-
-	public double getSolde() {
-		return solde;
-	}
-
-	public void setSolde(double solde) {
-		this.solde = solde;
-	}
-
-	public Client getClient() {
-		return client;
-	}
-
-	public void setClient(Client client) {
-		this.client = client;
-	}
-
-	public Employe getEmploye() {
-		return employe;
-	}
-
-	public void setEmploye(Employe employe) {
-		this.employe = employe;
-	}
-
-	public Collection<Operation> getOperations() {
-		return operations;
-	}
-
-	public void setOperations(Collection<Operation> operations) {
-		this.operations = operations;
-	}
-
-	@Override
-	public String toString() {
-		return "Compte [codeCompte=" + codeCompte + ", dateCreation=" + dateCreation + ", dateCreationDate="
-				+ dateCreationDate + ", solde=" + solde + ", client=" + client + ", employe=" + employe
-				+ ", operations=" + operations + "]";
-	}
-
-	public Compte() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Compte(Long codeCompte, String dateCreation, Date dateCreationDate, double solde, Client client,
-			Employe employe, Collection<Operation> operations) {
-		super();
-		this.codeCompte = codeCompte;
-		this.dateCreation = dateCreation;
-		this.dateCreationDate = dateCreationDate;
-		this.solde = solde;
-		this.client = client;
-		this.employe = employe;
-		this.operations = operations;
-	}
-	
-	
 
 	
 	

@@ -6,24 +6,23 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@NoArgsConstructor
+@Data
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode
 @Entity
 @DiscriminatorValue("CC")
 public class CompteCC extends Compte {
 	
 	@Column
 	private double decouvert;
-
-	public double getDecouvert() {
-		return decouvert;
-	}
-
-	public void setDecouvert(double decouvert) {
-		this.decouvert = decouvert;
-	}
-
-	
-	
-	
 
 	
 }

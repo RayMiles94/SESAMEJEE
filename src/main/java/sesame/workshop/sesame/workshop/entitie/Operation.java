@@ -12,7 +12,17 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+@NoArgsConstructor
+@Data
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(length = 1)
@@ -34,47 +44,5 @@ public class Operation implements Serializable {
 	@JoinColumn(name = "Code_Employe")
 	private Employe employe;
 
-	public Long getNumeroOperationLong() {
-		return numeroOperationLong;
-	}
-
-	public void setNumeroOperationLong(Long numeroOperationLong) {
-		this.numeroOperationLong = numeroOperationLong;
-	}
-
-	public Date getDateOperation() {
-		return dateOperation;
-	}
-
-	public void setDateOperation(Date dateOperation) {
-		this.dateOperation = dateOperation;
-	}
-
-	public double getMontant() {
-		return montant;
-	}
-
-	public void setMontant(double montant) {
-		this.montant = montant;
-	}
-
-	public Compte getCompte() {
-		return compte;
-	}
-
-	public void setCompte(Compte compte) {
-		this.compte = compte;
-	}
-
-	public Employe getEmploye() {
-		return employe;
-	}
-
-	public void setEmploye(Employe employe) {
-		this.employe = employe;
-	}
-
-		
-	
 	
 }
