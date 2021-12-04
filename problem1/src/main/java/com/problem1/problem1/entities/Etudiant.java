@@ -35,19 +35,24 @@ public class Etudiant implements Serializable {
 	@ManyToOne()
 	private Department department;
 	
-	public Etudiant() {
-		
-	}
+	public Etudiant() {}
 
 	public Etudiant(String nomE, int niveau, Date dateentre, double moyenne, Specialite sepSpecialite,
 			Department department) {
 		super();
-		NomE = nomE;
+		this.NomE = nomE;
 		this.niveau = niveau;
 		this.dateentre = dateentre;
 		this.moyenne = moyenne;
 		this.sepSpecialite = sepSpecialite;
 		this.department = department;
+	}
+	
+	public Etudiant(String nomE, int niveau, double moyenne) {
+		super();
+		this.NomE = nomE;
+		this.niveau = niveau;
+		this.moyenne = moyenne;
 	}
 
 	public Long getId() {
@@ -106,6 +111,4 @@ public class Etudiant implements Serializable {
 		this.department = department;
 	}
 
-	
-	
 }
