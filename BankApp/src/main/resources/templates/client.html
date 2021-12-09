@@ -1,0 +1,76 @@
+<html>
+
+<head>
+    <title>Bank App : Client</title>
+    <link rel="icon" type="image/x-icon" href="icon.ico">
+    <link href="bootstrap.css" rel="stylesheet">
+</head>
+
+<body style="background-color: grey;">
+	<style>
+	 .container {
+	 	background-color: white !important;
+	 }
+	</style>
+    <div class="container" >
+        <div class="row border border-primary">
+            <div class="col-2">
+                <img src="bank.png" alt="bank" width="50" height="50">
+            </div>
+            <div class="col-10">
+                <h1>Banque Application</h1>
+            </div>
+        </div>
+        <br/>
+        <div class="row border border-primary">
+            <table class="table">
+                <tr>
+                	<td><img src="icon.ico" alt="client" height="50" width="50"><a href="/" >Home</a></td>
+                    <td><img src="client.png" alt="client" height="50" width="50"><a href="/client" >Client</a></td>
+                    <td><img src="emp.png" alt="employee" height="50" width="50"><a href="/employee" >Employee</a></td>
+                    <td><img src="account.png" alt="account" height="50" width="50"><a href="/compte">Compte</a></td>
+                    <td><img src="send.png" alt="send" height="50" width="50"><a href="/opertaion">Operation</a></td>
+                </tr>
+            </table>
+        </div>
+        <br/>
+        <!--  body begin  -->
+        <div class="row">
+        	<div class="col-4">
+        		<a href="/addclient"><button class="btn btn-primary">Ajouter</button></a>
+        	</div>
+        	<div class="col-4">
+        	</div>
+        	<div class="col-4">
+        	</div>
+        	<div class="col-4">
+        	</div>
+        </div>
+        <div class="row">
+        <div class="col">
+        <table class="table table-striped">
+  			<thead>
+    			<tr>
+      				<th scope="col">#</th>
+      				<th scope="col">Nom de client</th>
+      				<th>Supprimer</th>
+    			</tr>
+  			</thead>
+  			<tbody>
+    			<tr th:if="${length}" th:each="c: ${clients}">
+    				<td ><a th:href="@{'/c/update/' + ${c.codeClient} }"><span th:text="${c.codeClient}" /></a></td>
+    				<td th:text="${c.nomClient}" />
+    				<td><a th:href="@{'/c/remove/' + ${c.codeClient} }"><img src="delete.png" height="50" weight="50"/></a></td>
+				</tr>
+				<tr th:if="${length==false}" >
+    				<td colspan="2">Vide</td>
+				</tr>
+  			</tbody>
+		</table>
+		</div>
+        <!--  body end  -->
+    </div>
+    <script src="bootstrap.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<html>
+
+<head>
+    <title>Bank App : Ajouter Client</title>
+    <link rel="icon" type="image/x-icon" href="http://localhost:4500/icon.ico">
+    <link href="http://localhost:4500/bootstrap.css" rel="stylesheet">
+</head>
+
+<body style="background-color: grey;">
+	<style>
+	 .container {
+	 	background-color: white !important;
+	 }
+	</style>
+    <div class="container" >
+        <div class="row border border-primary">
+            <div class="col-2">
+                <img src="http://localhost:4500/bank.png" alt="bank" width="50" height="50">
+            </div>
+            <div class="col-10">
+                <h1>Banque Application</h1>
+            </div>
+        </div>
+        <br/>
+        <div class="row border border-primary">
+            <table class="table">
+                <tr>
+                	<td><img src="http://localhost:4500/icon.ico" alt="client" height="50" width="50"><a href="/" >Home</a></td>
+                    <td><img src="http://localhost:4500/client.png" alt="client" height="50" width="50"><a href="/client" >Client</a></td>
+                    <td><img src="http://localhost:4500/emp.png" alt="employee" height="50" width="50"><a href="/employee" >Employee</a></td>
+                    <td><img src="http://localhost:4500/account.png" alt="account" height="50" width="50"><a href="/compte">Compte</a></td>
+                    <td><img src="http://localhost:4500/send.png" alt="send" height="50" width="50"><a href="/opertaion">Operation</a></td>
+                </tr>
+            </table>
+        </div>
+        <br/>
+        <!--  body begin  -->
+        
+        <div class="row">
+        	<form name="f1" action="/c/add" method="POST">
+        		<input  type="hidden"  th:value="${update}" name="update" id="update" />
+  				<div th:if="${update == false}" class="form-group">
+  					<input  type="hidden" value="nothing" name="id" id="id" />
+    				<label for="name">Nom de client</label>
+    				<input required name="name" type="text" class="form-control" id="name" aria-describedby="Nom" placeholder="Enter nom">
+  				</div> 
+  				<div th:if="${update}" class="form-group">
+  					<input  type="hidden" th:value="${id}" name="id" id="id" />
+    				<label for="name">Nom de client</label>
+    				<input required name="name" type="text" class="form-control" id="name" aria-describedby="Nom" placeholder="Enter nom"
+    				th:value="${name}">
+  				</div> 
+  				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+        </div>
+        <!--  body end  -->
+    </div>
+    <script src="http://localhost:4500/bootstrap.js"></script>
+</body>
+
+</html>
