@@ -38,13 +38,15 @@
         
         <div class="row">
         	<form name="f1" action="/co/add" method="POST">
-        		<input type="hidden" name="update" id="update" th:value="${update}"  />
+        	    <input type="hidden" id="update" name="update" th:value="${update}" />
+        		<input type="hidden" id="id" name="id" th:value="${id}" />
 				<div class="form-group">
     				<label for="client">client</label>
     				<select required class="form-control" id="client" 
     				name="client">
-      					<option 
+      					<option	
       					th:each="c : ${ces}" 
+      					th:selected="${com != null && c.nomClient == com.getClient().getNomClient()}"
       					th:value="${c.codeClient}" 
       					th:text="${c.nomClient}"></option>
    			 		</select>
@@ -55,6 +57,7 @@
     				 name="employees">
       					<option 
       					th:each="e : ${emps}" 
+      					th:selected="${com != null && e.nomEmployeString == com.getEmployes().getNomEmployeString()}"
       					th:value="${e.codeEmployeLong}" 
       					th:text="${e.nomEmployeString}"></option>
    			 		</select>
@@ -67,21 +70,23 @@
     					   class="form-control" 
     					   id="solde" 
     					   placeholder="Solde"
-    					   value="0"
+    					   th:value="${( com != null ? com.getSolde() :  0 )}"
     					   >
   				</div>
   				<div class="form-group">
     				<label for="ctype">type</label>
     				<select required class="form-control" id="ctype"
     				 name="ctype" >
-      					<option value="EP">EP</option>
-      					<option value="CC">CC</option>
+      					<option value="EP" 
+      					th:selected='${ (type != null && type.equals("CC") == false ) ? true : false  }'>EP</option>
+      					<option value="CC" 
+      					th:selected='${(type != null && type.equals("CC") == true )? true : false  }'>CC</option>
    			 		</select>
   				</div>
-  				<div style="display: none;" class="form-group" id="decouvertblock">
+  				<div th:style='${ (type != null && type.equals("CC")) ?  "" : "display: none;" }' class="form-group" id="decouvertblock">
     				<label for="decouvertb">decouvert</label>
     				<input required="false" type="number" class="form-control" 
-    				id="decouvertb" value="0" name="decouvertb" />
+    				id="decouvertb" th:value='${(type != null && type == "CC") ? com.getDecouvert() : 0}' name="decouvertb" />
   				</div>
   				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>

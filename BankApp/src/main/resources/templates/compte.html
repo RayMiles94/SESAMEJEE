@@ -61,7 +61,7 @@
   			</thead>
   			<tbody>
     			<tr  th:each="c: ${comptes1}">
-    				<td ><a th:href="@{'/co/update/' + ${c.codeCompte} }"><span th:text="${c.codeCompte}" /></a></td>
+    				<td ><a th:href="@{'/co/update/CC/' + ${c.codeCompte} }"><span th:text="${c.codeCompte}" /></a></td>
     				<td th:text="${c.client.getNomClient()}" />
     				<td th:text="${c.employes.getNomEmployeString()}" />
     				<td th:text="${c.solde}" />
@@ -69,7 +69,7 @@
     				<td><a th:href="@{'/co/remove/CC/' + ${c.codeCompte} }"><img src="delete.png" height="50" weight="50"/></a></td>
 				</tr>
 				<tr  th:each="c: ${comptes2}">
-    				<td ><a th:href="@{'/co/update/' + ${c.codeCompte} }"><span th:text="${c.codeCompte}" /></a></td>
+    				<td ><a th:href="@{'/co/update/EP/' + ${c.codeCompte} }"><span th:text="${c.codeCompte}" /></a></td>
     				<td th:text="${c.client.getNomClient()}" />
     				<td th:text="${c.employes.getNomEmployeString()}" />
     				<td th:text="${c.solde}" />
