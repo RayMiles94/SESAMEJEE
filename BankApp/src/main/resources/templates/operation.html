@@ -29,15 +29,62 @@
                     <td><img src="client.png" alt="client" height="50" width="50"><a href="/client" >Client</a></td>
                     <td><img src="emp.png" alt="employee" height="50" width="50"><a href="/employee" >Employee</a></td>
                     <td><img src="account.png" alt="account" height="50" width="50"><a href="/compte">Compte</a></td>
-                    <td><img src="send.png" alt="send" height="50" width="50"><a href="/opertaion">Operation</a></td>
+                    <td><img src="send.png" alt="send" height="50" width="50"><a href="/operation">Operation</a></td>
                 </tr>
             </table>
         </div>
         <br/>
         <!--  body begin  -->
-        <div class="row border border-primary">
-            <img src="bank_pic.jpg" class="img-fluid" alt="bank" width="500" height="500">
+        <div class="row">
+        	<div class="col-4">
+        		<a href="/addoperation"><button class="btn btn-primary">Ajouter</button></a>
+        	</div>
+        	<div class="col-4">
+        	</div>
+        	<div class="col-4">
+        	</div>
+        	<div class="col-4">
+        	</div>
         </div>
+        <div class="row">
+        <div class="col">
+        <table class="table table-striped">
+  			<thead>
+    			<tr>
+      				<th scope="col">#</th>
+      				<th>Date de operation</th>
+      				<th>Montant</th>
+      				<th>Type</th>
+      				<th>Compte</th>
+      				<th>Employee</th>
+      				<th>-</th>
+    			</tr>
+  			</thead>
+  			<tbody>
+    			<tr th:if="${length}" th:each="r: ${ret}">
+    				<td ><a th:href="@{'/op/update/ret/' + ${r.numeroOperation} }"><span th:text="${r.numeroOperation}" /></a></td>
+    				<td th:text="${r.dateOperation}" />
+    				<td th:text="${r.montant}" />
+    				<td >Retrait</td>
+    				<td th:text="${r.getCompte().getCodeCompte()}" />
+    				<td th:text="${r.getEmployes().getCodeEmployeLong()}" />
+    				<td><a th:href="@{'/op/remove/ret/' + ${r.numeroOperation} }"><img src="delete.png" height="50" weight="50"/></a></td>
+				</tr>
+				<tr th:if="${length}" th:each="v: ${vef}">
+    				<td ><a th:href="@{'/op/update/vef/' + ${v.numeroOperation} }"><span th:text="${v.numeroOperation}" /></a></td>
+    				<td th:text="${v.dateOperation}" />
+    				<td th:text="${v.montant}" />
+    				<td >Versement</td>
+    				<td th:text="${v.getCompte().getCodeCompte()}" />
+    				<td th:text="${v.getEmployes().getCodeEmployeLong()}" />
+    				<td><a th:href="@{'/op/remove/vef/' + ${v.numeroOperation} }"><img src="delete.png" height="50" weight="50"/></a></td>
+				</tr>
+				<tr th:if="${length==false}" >
+    				<td colspan="2">Vide</td>
+				</tr>
+  			</tbody>
+		</table>
+		</div>
         <!--  body end  -->
     </div>
     <script src="bootstrap.js"></script>

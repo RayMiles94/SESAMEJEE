@@ -86,10 +86,6 @@ public abstract class Compte implements Serializable  {
 		}
 	}
 	
-	
-
-
-
 	public Long getCodeCompte() {
 		return codeCompte;
 	}
