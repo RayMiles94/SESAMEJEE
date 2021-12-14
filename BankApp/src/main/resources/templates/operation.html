@@ -2,8 +2,8 @@
 
 <head>
     <title>Bank App : Operation</title>
-    <link rel="icon" type="image/x-icon" href="icon.ico">
-    <link href="bootstrap.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="http://localhost:4500/icon.ico">
+    <link href="http://localhost:4500/bootstrap.css" rel="stylesheet">
 </head>
 
 <body style="background-color: grey;">
@@ -15,21 +15,24 @@
     <div class="container" >
         <div class="row border border-primary">
             <div class="col-2">
-                <img src="bank.png" alt="bank" width="50" height="50">
+                <img src="http://localhost:4500/bank.png" alt="bank" width="50" height="50">
             </div>
-            <div class="col-10">
+            <div class="col-8">
                 <h1>Banque Application</h1>
+            </div>
+            <div class="col-2">
+            	<div><a href="/dec">Déconnexion<img src="delete.png" height="50" weight="50"/></a></div>
             </div>
         </div>
         <br/>
         <div class="row border border-primary">
             <table class="table">
                 <tr>
-                	<td><img src="icon.ico" alt="client" height="50" width="50"><a href="/" >Home</a></td>
-                    <td><img src="client.png" alt="client" height="50" width="50"><a href="/client" >Client</a></td>
-                    <td><img src="emp.png" alt="employee" height="50" width="50"><a href="/employee" >Employee</a></td>
-                    <td><img src="account.png" alt="account" height="50" width="50"><a href="/compte">Compte</a></td>
-                    <td><img src="send.png" alt="send" height="50" width="50"><a href="/operation">Operation</a></td>
+                	<td><img src="http://localhost:4500/icon.ico" alt="client" height="50" width="50"><a href="/" >Home</a></td>
+                    <td><img src="http://localhost:4500/client.png" alt="client" height="50" width="50"><a href="/client" >Client</a></td>
+                    <td><img src="http://localhost:4500/emp.png" alt="employee" height="50" width="50"><a href="/employee" >Employee</a></td>
+                    <td><img src="http://localhost:4500/account.png" alt="account" height="50" width="50"><a href="/compte">Compte</a></td>
+                    <td><img src="http://localhost:4500/send.png" alt="send" height="50" width="50"><a href="/operation">Operation</a></td>
                 </tr>
             </table>
         </div>
@@ -57,27 +60,24 @@
       				<th>Type</th>
       				<th>Compte</th>
       				<th>Employee</th>
-      				<th>-</th>
     			</tr>
   			</thead>
   			<tbody>
     			<tr th:if="${length}" th:each="r: ${ret}">
-    				<td ><a th:href="@{'/op/update/ret/' + ${r.numeroOperation} }"><span th:text="${r.numeroOperation}" /></a></td>
+    				<td ><span th:text="${r.numeroOperation}" /></td>
     				<td th:text="${r.dateOperation}" />
     				<td th:text="${r.montant}" />
     				<td >Retrait</td>
-    				<td th:text="${r.getCompte().getCodeCompte()}" />
-    				<td th:text="${r.getEmployes().getCodeEmployeLong()}" />
-    				<td><a th:href="@{'/op/remove/ret/' + ${r.numeroOperation} }"><img src="delete.png" height="50" weight="50"/></a></td>
+    				<td th:text="${r.getCompte().getClient().getNomClient() }" />
+    				<td th:text="${r.getEmployes().getNomEmployeString()}" />
 				</tr>
 				<tr th:if="${length}" th:each="v: ${vef}">
-    				<td ><a th:href="@{'/op/update/vef/' + ${v.numeroOperation} }"><span th:text="${v.numeroOperation}" /></a></td>
+    				<td ><span th:text="${v.numeroOperation}" /></td>
     				<td th:text="${v.dateOperation}" />
     				<td th:text="${v.montant}" />
     				<td >Versement</td>
-    				<td th:text="${v.getCompte().getCodeCompte()}" />
-    				<td th:text="${v.getEmployes().getCodeEmployeLong()}" />
-    				<td><a th:href="@{'/op/remove/vef/' + ${v.numeroOperation} }"><img src="delete.png" height="50" weight="50"/></a></td>
+    				<td th:text="${v.getCompte().getClient().getNomClient()  }" />
+    				<td th:text="${v.getEmployes().getNomEmployeString()}" />
 				</tr>
 				<tr th:if="${length==false}" >
     				<td colspan="2">Vide</td>
@@ -87,6 +87,6 @@
 		</div>
         <!--  body end  -->
     </div>
-    <script src="bootstrap.js"></script>
+    <script src="http://localhost:4500/bootstrap.js"></script>
 </body>
 </html>

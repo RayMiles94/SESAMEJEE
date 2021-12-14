@@ -1,7 +1,7 @@
 package sesame.jee.bank.BankApp.entities;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
@@ -24,7 +24,7 @@ public abstract class Operation implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long numeroOperation;
 	
-	private Date dateOperation;
+	private String dateOperation;
 	
 	private double montant;
 	
@@ -38,9 +38,9 @@ public abstract class Operation implements Serializable {
 	
 	public Operation() {}
 
-	public Operation(Date dateOperation, double montant, Compte compte, Employes employes) {
+	public Operation(double montant, Compte compte, Employes employes) {
 		super();
-		this.dateOperation = dateOperation;
+		this.dateOperation = (new Date()).toString();
 		this.montant = montant;
 		this.compte = compte;
 		this.employes = employes;
@@ -54,11 +54,11 @@ public abstract class Operation implements Serializable {
 		this.numeroOperation = numeroOperation;
 	}
 
-	public Date getDateOperation() {
+	public String getDateOperation() {
 		return dateOperation;
 	}
 
-	public void setDateOperation(Date dateOperation) {
+	public void setDateOperation(String dateOperation) {
 		this.dateOperation = dateOperation;
 	}
 
@@ -91,8 +91,5 @@ public abstract class Operation implements Serializable {
 		return "Operation [numeroOperation=" + numeroOperation + ", dateOperation=" + dateOperation + ", montant="
 				+ montant + ", compte=" + compte + ", employes=" + employes + "]";
 	}
-	
-	
-	
 	
 }
