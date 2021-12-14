@@ -59,7 +59,5 @@ public class Groupe {
 		return "Groupe [codeGroupe=" + codeGroupe + ", nomGroupeString=" + nomGroupeString + ", employes=" + employes
 				+ "]";
 	}
-	
-	
 
 }
