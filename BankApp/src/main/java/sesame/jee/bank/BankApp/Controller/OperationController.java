@@ -48,7 +48,7 @@ public class OperationController {
 	public String OpRoute(Model model) {
 		Collection<Retrait> rf = rDao.findAll();
 		Collection<Versement> vf = vDao.findAll();
-		model.addAttribute("length", rf.size() > 0 && vf.size() > 0);
+		model.addAttribute("length", rf.size() > 0 || vf.size() > 0);
 		model.addAttribute("ret", rf);
 		model.addAttribute("vef", vf);	
 		return "operation";
