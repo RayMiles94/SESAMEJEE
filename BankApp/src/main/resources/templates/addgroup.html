@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Bank App : Group</title>
+    <title>Bank App : Ajouter Group</title>
     <link rel="icon" type="image/x-icon" href="http://localhost:4500/icon.ico">
     <link href="http://localhost:4500/bootstrap.css" rel="stylesheet">
 </head>
@@ -39,39 +39,18 @@
         </div>
         <br/>
         <!--  body begin  -->
+        
         <div class="row">
-        	<div class="col-4">
-        		<a href="/addgroupe"><button class="btn btn-primary">Ajouter</button></a>
-        	</div>
-        	<div class="col-4">
-        	</div>
-        	<div class="col-4">
-        	</div>
-        	<div class="col-4">
-        	</div>
+        	<form name="f1" action="/g/add" method="POST">
+        		<input  type="hidden"  th:value="${(update!=null) ? 'yes' : 'no'}" name="update" id="update" />
+        		<input  type="hidden"  th:value="${(id!=null) ? id : ''}" name="id" id="id" />
+  				<div class="form-group">
+    				<label for="name">Nom de Group</label>
+    				<input required name="name" type="text" class="form-control" id="name" aria-describedby="Nom" placeholder="Enter nom" th:value="${(name!=null) ? name : ''}">
+  				</div> 
+  				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
         </div>
-        <div class="row">
-        <div class="col">
-        <table class="table table-striped">
-  			<thead>
-    			<tr>
-      				<th scope="col">#</th>
-      				<th>Nom de Group</th>
-      				<th>-</th>
-    			</tr>
-  			</thead>
-  			<tbody>
-    			<tr th:if="${length}" th:each="g: ${groups}">
-    				<td><a th:href="@{ '/g/update/' + ${g.codeGroupe} }"><span th:text="${g.codeGroupe}" /></a></td>
-    				<td th:text="${g.nomGroupeString}" />
-    				<td><a th:href="@{'/g/remove/' +  ${g.codeGroupe}  }">Supprimer<img src="http://localhost:4500/delete.png" height="50" weight="50"/></a></td>
-				</tr>
-				<tr th:if="${length==false}" >
-    				<td colspan="3">Vide</td>
-				</tr>
-  			</tbody>
-		</table>
-		</div>
         <!--  body end  -->
     </div>
     <script src="http://localhost:4500/bootstrap.js"></script>

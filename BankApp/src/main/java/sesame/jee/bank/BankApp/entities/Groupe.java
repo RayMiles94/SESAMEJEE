@@ -23,6 +23,10 @@ public class Groupe {
 	private Collection<Employes> employes;
 	
 	public Groupe() {}
+	
+	public Groupe(String nomString) {
+		this.nomGroupeString = nomString;
+	}
 
 	public Groupe(String nomGroupeString, Collection<Employes> employes) {
 		super();

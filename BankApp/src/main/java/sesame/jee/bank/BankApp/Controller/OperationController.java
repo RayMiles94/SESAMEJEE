@@ -46,6 +46,14 @@ public class OperationController {
 	
 	@GetMapping("/operation")
 	public String OpRoute(Model model) {
+		if(employeeDAO.findAll().size()==0) {
+			model.addAttribute("message", "Veuillez créer un employé et un client pour ouvrir cette page");
+			return "empty_page";
+		}
+		if(comdao.findAll().size()==0 || ccdao.findAll().size()==0) {
+			model.addAttribute("message", "Veuillez créer un employé et un client pour ouvrir cette page");
+			return "empty_page";
+		}
 		Collection<Retrait> rf = rDao.findAll();
 		Collection<Versement> vf = vDao.findAll();
 		model.addAttribute("length", rf.size() > 0 || vf.size() > 0);

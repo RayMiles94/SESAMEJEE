@@ -38,6 +38,14 @@ public class CompteController {
 	
 	@GetMapping("/compte")
 	public String CPRoute(Model model) {
+		if (cr.findAll().size()==0) {
+			model.addAttribute("message", "Veuillez créer un employé et un client pour ouvrir cette page");
+			return "empty_page";
+		}
+		if (emps.findAll().size()==0) {
+			model.addAttribute("message", "Veuillez créer un employé et un client pour ouvrir cette page");
+			return "empty_page";
+		}
 		Collection<CompteCC> cc = compteCCDAO.findAll();
 		Collection<CompteEP> epa = ep.findAll();
 	    Boolean lengthBoolean = cc.size() == 0 && epa.size() == 0;
