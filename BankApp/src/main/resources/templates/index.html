@@ -1,49 +1,66 @@
 <html>
 
 <head>
-    <title>Bank App</title>
-    <link rel="icon" type="image/x-icon" href="icon.ico">
-    <link href="bootstrap.css" rel="stylesheet">
+<title>Bank App</title>
+<link rel="icon" type="image/x-icon" href="icon.ico">
+<link href="bootstrap.css" rel="stylesheet">
 </head>
 
 <body style="background-color: grey;">
 	<style>
-	 .container {
-	 	background-color: white !important;
-	 }
-	</style>
-    <div class="container" >
-        <div class="row border border-primary">
-            <div class="col-2">
-                <img src="http://localhost:4500/bank.png" alt="bank" width="50" height="50">
-            </div>
-            <div class="col-8">
-                <h1>Banque Application</h1>
-            </div>
-            <div class="col-2">
-            	<div><a href="/dec">Déconnexion<img src="delete.png" height="50" weight="50"/></a></div>
-            </div>
-        </div>
-        <br/>
-        <div class="row border border-primary">
-            <table class="table">
-                <tr>
-                	<td><img src="icon.ico" alt="client" height="50" width="50"><a href="/" >Home</a></td>
-                    <td><img src="client.png" alt="client" height="50" width="50"><a href="/client" >Client</a></td>
-                    <td><img src="emp.png" alt="employee" height="50" width="50"><a href="/employee" >Employee</a></td>
-                    <td><img src="http://localhost:4500/group.png" alt="group" height="50" width="50"><a href="/group" >Group</a></td>
-                    <td><img src="account.png" alt="account" height="50" width="50"><a href="/compte">Compte</a></td>
-                    <td><img src="send.png" alt="send" height="50" width="50"><a href="/operation">Operation</a></td>
-                </tr>
-            </table>
-        </div>
-        <br/>
-        <!--  body begin  -->
-        <div class="row border border-primary">
-            <img src="bank_pic.jpg" class="img-fluid" alt="bank" width="500" height="500">
-        </div>
-        <!--  body end  -->
-    </div>
-    <script src="bootstrap.js"></script>
+.container {
+	background-color: white !important;
+}
+</style>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="/"><img
+			src="http://localhost:4500/icon.ico" alt="client" height="50"
+			width="50"></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNav" aria-controls="navbarNav"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item active"><a class="nav-link" href="/">Accueil</a></li>
+				<li class="nav-item"><a class="nav-link" href="/client"><img
+						src="http://localhost:4500/client.png" alt="client" height="50"
+						width="50">Client</img></a></li>
+				<li class="nav-item"><a class="nav-link" href="/employee"><img
+						src="http://localhost:4500/emp.png" alt="employee" height="50"
+						width="50">Employee</img></a></li>
+				<li class="nav-item"><a class="nav-link" href="/group"><img
+						src="http://localhost:4500/group.png" alt="group" height="50"
+						width="50">Group</img></a></li>
+				<li class="nav-item"><a class="nav-link" href="/compte"><img
+						src="http://localhost:4500/account.png" alt="compte" height="50"
+						width="50">Compte</img></a></li>
+				<li class="nav-item"><a class="nav-link" href="/operation"><img
+						src="http://localhost:4500/send.png" alt="compte" height="50"
+						width="50">Operation</img></a></li>
+				</li>
+			</ul>
+			<div class="form-inline my-2 my-lg-0">
+				<div>
+				<a class="nav-link" href="/dec">Déconnexion<img
+						src="http://localhost:4500/delete.png" alt="deconnete" height="50"
+						width="50"></a>
+				</div>
+			</div>
+		</div>
+	</nav>
+	<br />
+	<div class="container">
+		<div class="row">
+			<!--  body begin  -->
+			<div class="row border border-primary">
+				<img src="bank_pic.jpg" class="img-fluid" alt="bank" width="500"
+					height="500">
+			</div>
+			<!--  body end  -->
+		</div>
+	</div>
+	<script src="bootstrap.js"></script>
 </body>
 </html>

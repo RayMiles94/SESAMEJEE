@@ -1,50 +1,68 @@
 <html>
 
 <head>
-    <title>Bank App : Compte</title>
-    <link rel="icon" type="image/x-icon" href="icon.ico">
-    <link href="http://localhost:4500/bootstrap.css" rel="stylesheet">
+<title>Bank App : Compte</title>
+<link rel="icon" type="image/x-icon" href="icon.ico">
+<link href="http://localhost:4500/bootstrap.css" rel="stylesheet">
 </head>
 
-<body style="background-color: grey;">
+<body style="background-image: url('http://localhost:4500/bank_wall.jpg');">
 	<style>
-	 .container {
-	 	background-color: white !important;
-	 }
-	</style>
-    <div class="container" >
-        <div class="row border border-primary">
-           <div class="col-2">
-                <img src="http://localhost:4500/bank.png" alt="bank" width="50" height="50">
-            </div>
-            <div class="col-10">
-                <h1>Banque Application</h1>
-            </div>
-        </div>
-        <br/>
-        <!--  body begin  -->
-         <div class="row">
-        	<form name="f1" action="/web/login" method="POST">
-				<div class="form-group">
-    				<label for="login">Login</label>
-    				<input id="login" name="login" class="form-control" type="text"  required />
-  				</div>
-  				<div class="form-group">
-    				<label for="password">Mot de passe</label>
-    				<input id="password" name="password" class="form-control" type="password" required />
-  				</div>
-  				<button type="submit" class="btn btn-primary">Se connect</button>
-			</form>
-        </div>
-        <div th:if="${error != null}" class="row">
-        	<div class="col">
-        		<div class="alert alert-danger" role="alert">
-  					le mot de passe ou login est incrorrect!
+.btn-color {
+	background-color: #0e1c36;
+	color: #fff;
+}
+
+.profile-image-pic {
+	height: 200px;
+	width: 200px;
+	object-fit: cover;
+}
+
+.cardbody-color {
+	background-color: #ebf2fa;
+}
+
+a {
+	text-decoration: none;
+}
+</style>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 offset-md-3">
+				<div class="card my-5">
+
+					<form name="f1" action="/web/login" method="POST"
+						class="card-body cardbody-color p-lg-5">
+						<div class="text-center">
+							<img
+								src="http://localhost:4500/bank_login.png"
+								class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
+								width="200px" alt="profile">
+						</div>
+
+						<div class="mb-3">
+							<input type="text" class="form-control" id="login" name="login" required
+								aria-describedby="emailHelp" placeholder="Login">
+						</div>
+						<div class="mb-3">
+							<input type="password" class="form-control" id="password" required
+								name="password" placeholder="Mot de passe">
+						</div>
+						<div class="text-center">
+							<button type="submit" class="btn btn-color px-5 mb-5 w-100">Login</button>
+						</div>
+						<div class="mb-3" th:if="${error != null}">
+							<div class="col">
+								<div class="alert alert-danger" role="alert">le mot de
+									passe ou login est incrorrect!</div>
+							</div>
+						</div>
+					</form>
 				</div>
-        	</div>
-        </div>
-        <!--  body end  -->
-    </div>
-    <script src="http://localhost:4500/bootstrap.js"></script>
+			</div>
+		</div>
+	</div>
+	<script src="http://localhost:4500/bootstrap.js"></script>
 </body>
 </html>
