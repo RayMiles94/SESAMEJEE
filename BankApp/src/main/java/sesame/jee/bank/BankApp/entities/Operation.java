@@ -13,7 +13,6 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(length = 1)
@@ -23,20 +22,21 @@ public abstract class Operation implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long numeroOperation;
-	
+
 	private String dateOperation;
-	
+
 	private double montant;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "Code_CPT")
 	private Compte compte;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "Code_Employe")
 	private Employes employes;
-	
-	public Operation() {}
+
+	public Operation() {
+	}
 
 	public Operation(double montant, Compte compte, Employes employes) {
 		super();
@@ -91,5 +91,5 @@ public abstract class Operation implements Serializable {
 		return "Operation [numeroOperation=" + numeroOperation + ", dateOperation=" + dateOperation + ", montant="
 				+ montant + ", compte=" + compte + ", employes=" + employes + "]";
 	}
-	
+
 }

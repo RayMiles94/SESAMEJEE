@@ -21,71 +21,69 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(
-		name = "Type_CPT", 
-		discriminatorType = DiscriminatorType.STRING,
-		length = 2)
-public abstract class Compte implements Serializable  {
+@DiscriminatorColumn(name = "Type_CPT", discriminatorType = DiscriminatorType.STRING, length = 2)
+public abstract class Compte implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long codeCompte;
-	
+
 	private String dateCreation;
-	
+
 	private double solde;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "Code_cli")
 	private Client client;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "Code_Emp")
 	private Employes employes;
-	
+
 	@OneToMany(mappedBy = "compte")
 	private Collection<Operation> operations;
-	
-	public Compte() {}
-	
+
+	public Compte() {
+	}
+
 	public Compte(double solde, Client client, Employes employes) {
 		this.solde = solde;
 		this.client = client;
 		this.employes = employes;
 		this.dateCreation = (new Date()).toString();
 	}
-	
-	public Compte(String dateCreation, double solde, Client client, Employes employes, Collection<Operation> operations) {
+
+	public Compte(String dateCreation, double solde, Client client, Employes employes,
+			Collection<Operation> operations) {
 		this.dateCreation = dateCreation;
 		this.solde = solde;
 		this.client = client;
 		this.employes = employes;
 		this.operations = operations;
 	}
-	
+
 	private void submontant(double solde) {
 		this.solde = this.solde - solde;
 	}
-	
+
 	private void addmontant(double d) {
 		this.solde += d;
 	}
-	
-	public void setaddmontant(double d ) {
-		if (d!=0) {
+
+	public void setaddmontant(double d) {
+		if (d != 0) {
 			this.addmontant(d);
 		}
 	}
-	
+
 	public void setsubmontant(double s) {
-		if (s==0) {
+		if (s == 0) {
 			System.out.print("can't sub from solde");
-		}
-		else {
+		} else {
 			this.submontant(s);
 		}
 	}
-	
+
 	public Long getCodeCompte() {
 		return codeCompte;
 	}
@@ -93,11 +91,11 @@ public abstract class Compte implements Serializable  {
 	public void setCodeCompte(Long codeCompte) {
 		this.codeCompte = codeCompte;
 	}
-	
+
 	@PreUpdate
-    protected void preUpdate() {
-        this.dateCreation = (new Date()).toString();
-    }
+	protected void preUpdate() {
+		this.dateCreation = (new Date()).toString();
+	}
 
 	public String getDateCreation() {
 		return dateCreation;
@@ -138,5 +136,5 @@ public abstract class Compte implements Serializable  {
 	public void setOperations(Collection<Operation> operations) {
 		this.operations = operations;
 	}
-	
+
 }

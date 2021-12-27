@@ -17,14 +17,14 @@ import sesame.jee.bank.BankApp.DAO.ClientRepo;
 
 @Controller
 public class ClientController {
-	
+
 	public ClientRepo ClientRepo;
-	
+
 	@Autowired
-	public  ClientController(ClientRepo ClientRepo) {
+	public ClientController(ClientRepo ClientRepo) {
 		this.ClientRepo = ClientRepo;
 	}
-	
+
 	@GetMapping("/client")
 	public String ClientRoute(Model model) {
 		Collection<Client> clients = ClientRepo.findAll();
@@ -32,26 +32,21 @@ public class ClientController {
 		model.addAttribute("clients", clients);
 		return "client";
 	}
-	
+
 	@GetMapping("/addclient")
 	public String ADDClientRoute(Model model) {
 		model.addAttribute("update", false);
 		return "addclient";
 	}
-	
+
 	@PostMapping("/c/add")
-	public String ADDClientRoutebackend(
-			@RequestParam("name") String name,
-			@RequestParam("id") String id, 
-			@RequestParam("update") String u,
-			Model model
-			) {
+	public String ADDClientRoutebackend(@RequestParam("name") String name, @RequestParam("id") String id,
+			@RequestParam("update") String u, Model model) {
 		Boolean update = Boolean.parseBoolean(u);
-		if (update==false) {
-			Client  client1 =  new Client(name);
+		if (update == false) {
+			Client client1 = new Client(name);
 			ClientRepo.save(client1);
-		}
-		else {
+		} else {
 			Long idLong = Long.parseLong(id);
 			Optional<Client> clients = ClientRepo.findById(idLong);
 			Client client2 = clients.get();
@@ -60,14 +55,14 @@ public class ClientController {
 		}
 		return "redirect:/client";
 	}
-	
+
 	@GetMapping("/c/remove/{id}")
 	public String RemoveClientRoutebackend(@PathVariable String id) {
 		Long idLong = Long.parseLong(id);
 		ClientRepo.deleteById(idLong);
 		return "redirect:/client";
 	}
-	
+
 	@GetMapping("/c/update/{id}")
 	public String UpdateClientRoutebackend(@PathVariable String id, Model model) {
 		Long idLong = Long.parseLong(id);

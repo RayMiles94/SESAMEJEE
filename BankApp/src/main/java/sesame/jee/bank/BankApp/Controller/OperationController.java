@@ -23,8 +23,7 @@ import sesame.jee.bank.BankApp.entities.Versement;
 
 @Controller
 public class OperationController {
-	
-	
+
 	public RetraitDAO rDao;
 	public VersementDAO vDao;
 	public CompteCCDAO ccdao;
@@ -32,25 +31,26 @@ public class OperationController {
 	public EmployeeDAO employeeDAO;
 	public RetraitDAO retraitDAO;
 	public VersementDAO versementDAO;
-	
+
 	@Autowired
-	public OperationController(RetraitDAO r, VersementDAO v, CompteCCDAO ccdao, CompateEPDAO comdao, EmployeeDAO employeeDAO, RetraitDAO retraitDAO, VersementDAO versementDAO) {
+	public OperationController(RetraitDAO r, VersementDAO v, CompteCCDAO ccdao, CompateEPDAO comdao,
+			EmployeeDAO employeeDAO, RetraitDAO retraitDAO, VersementDAO versementDAO) {
 		this.rDao = r;
 		this.vDao = v;
 		this.ccdao = ccdao;
 		this.comdao = comdao;
 		this.employeeDAO = employeeDAO;
-		this.retraitDAO =retraitDAO;
+		this.retraitDAO = retraitDAO;
 		this.versementDAO = versementDAO;
 	}
-	
+
 	@GetMapping("/operation")
 	public String OpRoute(Model model) {
-		if(employeeDAO.findAll().size()==0) {
+		if (employeeDAO.findAll().size() == 0) {
 			model.addAttribute("message", "Veuillez créer un employé et un client pour ouvrir cette page");
 			return "empty_page";
 		}
-		if(comdao.findAll().size()==0 || ccdao.findAll().size()==0) {
+		if (comdao.findAll().size() == 0 || ccdao.findAll().size() == 0) {
 			model.addAttribute("message", "Veuillez créer un employé et un client pour ouvrir cette page");
 			return "empty_page";
 		}
@@ -58,10 +58,10 @@ public class OperationController {
 		Collection<Versement> vf = vDao.findAll();
 		model.addAttribute("length", rf.size() > 0 || vf.size() > 0);
 		model.addAttribute("ret", rf);
-		model.addAttribute("vef", vf);	
+		model.addAttribute("vef", vf);
 		return "operation";
 	}
-	
+
 	@GetMapping("/addoperation")
 	public String ADDOperationroute(Model model) {
 		model.addAttribute("coma", ccdao.findAll());
@@ -69,31 +69,25 @@ public class OperationController {
 		model.addAttribute("emp", employeeDAO.findAll());
 		return "addoperation";
 	}
-	
+
 	@PostMapping("/op/dd")
-	public String PostOp(
-			@RequestParam("empid") 	 String emp,
-			@RequestParam("com") 	 String com,
-			@RequestParam("type") 	 String t,
-			@RequestParam("montant") String montant,
-			Model model
-	) {
+	public String PostOp(@RequestParam("empid") String emp, @RequestParam("com") String com,
+			@RequestParam("type") String t, @RequestParam("montant") String montant, Model model) {
 		Optional<Employes> empOptional = this.employeeDAO.findById(Long.parseLong(emp));
 		Employes e = empOptional.get();
 		String[] parts = com.split("/");
 		double mDouble = Double.parseDouble(montant);
-		if(parts[0].equals("cc")) {
+		if (parts[0].equals("cc")) {
 			System.out.println(Long.parseLong(parts[1]));
 			Optional<CompteCC> ccOptional = ccdao.findById(Long.parseLong(parts[1]));
 			CompteCC c1 = ccOptional.get();
-			if(t.equals("versement")) {
+			if (t.equals("versement")) {
 				c1.setaddmontant(mDouble);
 				ccdao.save(c1);
 				Versement versement = new Versement(mDouble, c1, e);
 				versementDAO.save(versement);
-			}
-			else {
-				if (c1.getSolde()<0) {
+			} else {
+				if (c1.getSolde() < 0) {
 					model.addAttribute("error", "solde");
 					return "addoperation";
 				}
@@ -102,19 +96,17 @@ public class OperationController {
 				Retrait retrait = new Retrait(mDouble, c1, e);
 				retraitDAO.save(retrait);
 			}
-			
-		}
-		else {
+
+		} else {
 			Optional<CompteEP> ccOptional = comdao.findById(Long.parseLong(parts[1]));
 			CompteEP c1 = ccOptional.get();
-			if(t.equals("versement")) {
+			if (t.equals("versement")) {
 				c1.setaddmontant(mDouble);
 				comdao.save(c1);
 				Versement versement = new Versement(mDouble, c1, e);
 				versementDAO.save(versement);
-			}
-			else {
-				if (c1.getSolde()<0) {
+			} else {
+				if (c1.getSolde() < 0) {
 					model.addAttribute("error", "solde");
 					return "addoperation";
 				}
@@ -126,5 +118,5 @@ public class OperationController {
 		}
 		return "redirect:/operation";
 	}
-	
+
 }

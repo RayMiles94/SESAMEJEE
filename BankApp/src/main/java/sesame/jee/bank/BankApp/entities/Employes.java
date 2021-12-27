@@ -18,19 +18,20 @@ public class Employes implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long codeEmployeLong;
-	
+
 	private String nomEmployeString;
-	
+
 	@ManyToOne
-	@JoinColumn(name="Code_emp_sup")
+	@JoinColumn(name = "Code_emp_sup")
 	private Employes employesSup;
-	
+
 	@ManyToMany
-	@JoinTable(name = "Emp_Gr", joinColumns = @JoinColumn(name="Num_EMP"), inverseJoinColumns = @JoinColumn(name="Num_groupe"))
+	@JoinTable(name = "Emp_Gr", joinColumns = @JoinColumn(name = "Num_EMP"), inverseJoinColumns = @JoinColumn(name = "Num_groupe"))
 	private Collection<Groupe> groupes;
-	
-	public Employes() {}
-	
+
+	public Employes() {
+	}
+
 	public Employes(String nomEmployeString) {
 		super();
 		this.nomEmployeString = nomEmployeString;
@@ -80,5 +81,5 @@ public class Employes implements Serializable {
 		return "Employes [codeEmployeLong=" + codeEmployeLong + ", nomEmployeString=" + nomEmployeString
 				+ ", employesSup=" + employesSup + ", groupes=" + groupes + "]";
 	}
-	
+
 }

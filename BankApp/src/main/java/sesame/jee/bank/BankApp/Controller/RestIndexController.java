@@ -6,17 +6,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sesame.jee.bank.BankApp.service.IndexService;
 
-
 @RestController
 public class RestIndexController {
-	
+
 	@Autowired
 	public IndexService indexService;
-	
+
 	@PostMapping("/index/getcount")
-	public HashMap<String, Object> getcounts(){
+	public HashMap<String, Object> getcounts() {
 		return indexService.getCountofdata();
 	}
-	
 
 }

@@ -12,18 +12,19 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Groupes")
 public class Groupe {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long codeGroupe;
-	
+
 	private String nomGroupeString;
-	
+
 	@ManyToMany(mappedBy = "groupes")
 	private Collection<Employes> employes;
-	
-	public Groupe() {}
-	
+
+	public Groupe() {
+	}
+
 	public Groupe(String nomString) {
 		this.nomGroupeString = nomString;
 	}

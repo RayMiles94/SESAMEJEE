@@ -1,19 +1,22 @@
 <html>
 
 <head>
-    <title>Bank App : Ajouter Compte</title>
-    <link rel="icon" type="image/x-icon" href="http://localhost:4500/icon.ico">
-    <link href="http://localhost:4500/bootstrap.css" rel="stylesheet">
+<title>Bank App : Ajouter Compte</title>
+<link rel="icon" type="image/x-icon"
+	href="http://localhost:4500/icon.ico">
+<link href="http://localhost:4500/bootstrap.css" rel="stylesheet">
 </head>
 
 <body style="background-color: grey;">
 	<style>
-	 .container {
-	 	background-color: white !important;
-	 }
-	</style>
+.container {
+	background-color: white !important;
+}
+</style>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="/"><img src="http://localhost:4500/icon.ico" alt="client" height="50" width="50"></a>
+		<a class="navbar-brand" href="/"><img
+			src="http://localhost:4500/icon.ico" alt="client" height="50"
+			width="50"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -22,97 +25,88 @@
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item active"><a class="nav-link" href="/">Accueil
-					
+
 				</a></li>
-				<li class="nav-item"><a class="nav-link" href="/client"><img src="http://localhost:4500/client.png" alt="client"
-						height="50" width="50">Client</img></a></li>
-				<li class="nav-item"><a class="nav-link" href="/employee"><img src="http://localhost:4500/emp.png" alt="employee"
-						height="50" width="50">Employee</img></a></li>
-				<li class="nav-item"><a class="nav-link" href="/group"><img src="http://localhost:4500/group.png" alt="group"
-						height="50" width="50">Group</img></a></li>
-				<li class="nav-item"><a class="nav-link" href="/compte"><img src="http://localhost:4500/account.png" alt="compte"
-						height="50" width="50">Compte</img></a></li>
-				<li class="nav-item"><a class="nav-link" href="/operation"><img src="http://localhost:4500/send.png" alt="compte"
-						height="50" width="50">Operation</img></a></li>
+				<li class="nav-item"><a class="nav-link" href="/client"><img
+						src="http://localhost:4500/client.png" alt="client" height="50"
+						width="50">Client</img></a></li>
+				<li class="nav-item"><a class="nav-link" href="/employee"><img
+						src="http://localhost:4500/emp.png" alt="employee" height="50"
+						width="50">Employee</img></a></li>
+				<li class="nav-item"><a class="nav-link" href="/group"><img
+						src="http://localhost:4500/group.png" alt="group" height="50"
+						width="50">Group</img></a></li>
+				<li class="nav-item"><a class="nav-link" href="/compte"><img
+						src="http://localhost:4500/account.png" alt="compte" height="50"
+						width="50">Compte</img></a></li>
+				<li class="nav-item"><a class="nav-link" href="/operation"><img
+						src="http://localhost:4500/send.png" alt="compte" height="50"
+						width="50">Operation</img></a></li>
 				</li>
 			</ul>
 			<div class="form-inline my-2 my-lg-0">
 				<div>
-				<a class="nav-link" href="/dec">Déconnexion<img
+					<a class="nav-link" href="/dec">Déconnexion<img
 						src="http://localhost:4500/delete.png" alt="deconnete" height="50"
 						width="50"></a>
 				</div>
 			</div>
 		</div>
 	</nav>
-	<br/>
-    <div class="container" >
-        <!--  body begin  -->
-        <br/>
-        <div class="row">
-        	<form name="f1" action="/co/add" method="POST">
-        	    <input type="hidden" id="update" name="update" th:value="${update}" />
-        		<input type="hidden" id="id" name="id" th:value="${id}" />
+	<br />
+	<div class="container">
+		<!--  body begin  -->
+		<br />
+		<div class="row">
+			<form name="f1" action="/co/add" method="POST">
+				<input type="hidden" id="update" name="update" th:value="${update}" />
+				<input type="hidden" id="id" name="id" th:value="${id}" />
 				<div class="form-group">
-    				<label for="client">client</label>
-    				<select required class="form-control" id="client" 
-    				name="client">
-      					<option	
-      					th:each="c : ${ces}" 
-      					th:selected="${com != null && c.nomClient == com.getClient().getNomClient()}"
-      					th:value="${c.codeClient}" 
-      					th:text="${c.nomClient}"></option>
-   			 		</select>
-  				</div>
-  				<div class="form-group">
-    				<label for="employees">employees</label>
-    				<select required class="form-control" id="employees"
-    				 name="employees">
-      					<option 
-      					th:each="e : ${emps}" 
-      					th:selected="${com != null && e.nomEmployeString == com.getEmployes().getNomEmployeString()}"
-      					th:value="${e.codeEmployeLong}" 
-      					th:text="${e.nomEmployeString}"></option>
-   			 		</select>
-  				</div>
-  				<div class="form-group">
-    				<label for="solde">Solde</label>
-    				<input required 
-    					   name="solde" 
-    					   type="number" 
-    					   class="form-control" 
-    					   id="solde" 
-    					   placeholder="Solde"
-    					   th:value="${( com != null ? com.getSolde() :  0 )}"
-    					   >
-  				</div>
-  				<div class="form-group">
-    				<label for="ctype">type</label>
-    				<select required class="form-control" id="ctype"
-    				 name="ctype" >
-      					<option value="EP" 
-      					th:selected='${ (type != null && type.equals("CC") == false ) ? true : false  }'>EP</option>
-      					<option value="CC" 
-      					th:selected='${(type != null && type.equals("CC") == true )? true : false  }'>CC</option>
-   			 		</select>
-  				</div>
-  				<div th:style='${ (type != null && type.equals("CC")) ?  "" : "display: none;" }' class="form-group" id="decouvertblock">
-    				<label for="decouvertb">decouvert</label>
-    				<input required="false" 
-    						type="number" 
-    						class="form-control" 
-    						id="decouvertb" 
-    						th:value='${(type != null && type == "CC") ? com.getDecouvert() : 0}'
-    					 	name="decouvertb" />
-  				</div>
-  				<br/>
-  				<button type="submit" class="btn btn-primary">Submit</button>
+					<label for="client">client</label> <select required
+						class="form-control" id="client" name="client">
+						<option th:each="c : ${ces}"
+							th:selected="${com != null && c.nomClient == com.getClient().getNomClient()}"
+							th:value="${c.codeClient}" th:text="${c.nomClient}"></option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="employees">employees</label> <select required
+						class="form-control" id="employees" name="employees">
+						<option th:each="e : ${emps}"
+							th:selected="${com != null && e.nomEmployeString == com.getEmployes().getNomEmployeString()}"
+							th:value="${e.codeEmployeLong}" th:text="${e.nomEmployeString}"></option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="solde">Solde</label> <input required name="solde"
+						type="number" class="form-control" id="solde" placeholder="Solde"
+						th:value="${( com != null ? com.getSolde() :  0 )}">
+				</div>
+				<div class="form-group">
+					<label for="ctype">type</label> <select required
+						class="form-control" id="ctype" name="ctype">
+						<option value="EP"
+							th:selected='${ (type != null && type.equals("CC") == false ) ? true : false  }'>EP</option>
+						<option value="CC"
+							th:selected='${(type != null && type.equals("CC") == true )? true : false  }'>CC</option>
+					</select>
+				</div>
+				<div
+					th:style='${ (type != null && type.equals("CC")) ?  "" : "display: none;" }'
+					class="form-group" id="decouvertblock">
+					<label for="decouvertb">decouvert</label> <input required="false"
+						type="number" class="form-control" id="decouvertb"
+						th:value='${(type != null && type == "CC") ? com.getDecouvert() : 0}'
+						name="decouvertb" />
+				</div>
+				<br />
+				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
-        </div>
-        <!--  body end  -->
-        <div class="row" th:if="(list!=null) ? true : false">
-        	<div class="col">
-        		<table class="table table-striped">
+		</div>
+		<!--  body end  -->
+		<div class="row" th:if="(list!=null) ? true : false">
+			<div class="col">
+				<table class="table table-striped">
 					<thead>
 						<tr>
 							<th scope="col">#</th>
@@ -127,15 +121,15 @@
 							<td th:text="${o.montant}" />
 						</tr>
 						<tr colspan="3" th:if="${list != null &&list.size()==0}">
-							<td colspan="3" >no records</td>
+							<td colspan="3">no records</td>
 						</tr>
 					</tbody>
 				</table>
-        	</div>
-        </div>
-    </div>
-    <script src="http://localhost:4500/bootstrap.js"></script>
-    <script>
+			</div>
+		</div>
+	</div>
+	<script src="http://localhost:4500/bootstrap.js"></script>
+	<script>
     	document.getElementById('ctype').onchange = () => {
     			let typeselection = document.getElementById('ctype');
     			if (typeselection.value == "CC") {

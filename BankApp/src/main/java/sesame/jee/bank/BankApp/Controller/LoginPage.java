@@ -13,32 +13,32 @@ import sesame.jee.bank.BankApp.service.LoginService;
 
 @Controller
 public class LoginPage {
-	
+
 	@Autowired
 	public LoginService loginService;
 
-	
 	@GetMapping("/login")
 	public String loginroute(HttpSession session) {
 		return "login";
 	}
-	
+
 	@PostMapping("/web/login")
-	public String LoginRouteSubmit(Model model, @RequestParam("login") String login, @RequestParam("password") String password, HttpSession session) {
+	public String LoginRouteSubmit(Model model, @RequestParam("login") String login,
+			@RequestParam("password") String password, HttpSession session) {
 		loginService.setLogin(login);
 		loginService.setPassword(password);
-		if(loginService.checkifcorrect()) {
+		if (loginService.checkifcorrect()) {
 			session.setAttribute("login", "true");
 			return "redirect:/";
 		}
 		model.addAttribute("error", "error");
 		return "login";
 	}
-	
+
 	@GetMapping("/dec")
 	public String dec(HttpSession session) {
 		session.removeAttribute("login");
 		return "redirect:/login";
 	}
-	
+
 }

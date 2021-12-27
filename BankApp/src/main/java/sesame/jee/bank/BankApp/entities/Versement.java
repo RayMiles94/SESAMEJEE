@@ -6,9 +6,10 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("v")
 public class Versement extends Operation {
-	
-	public Versement() {}
-	
+
+	public Versement() {
+	}
+
 	public Versement(double montant, Compte compte, Employes employes) {
 		super(montant, compte, employes);
 	}

@@ -20,19 +20,19 @@ import sesame.jee.bank.BankApp.entities.Groupe;
 
 @Controller
 public class EmployeeController {
-	
+
 	public EmployeeDAO employeeDAO;
 	public GroupeRepo groupeRepo;
-	
+
 	@Autowired
 	public EmployeeController(EmployeeDAO employeeDAO, GroupeRepo groupeRepo) {
 		this.employeeDAO = employeeDAO;
 		this.groupeRepo = groupeRepo;
 	}
-	
+
 	@GetMapping("/employee")
 	public String EmpRoute(Model model) {
-		if(groupeRepo.findAll().size()==0) {
+		if (groupeRepo.findAll().size() == 0) {
 			model.addAttribute("message", "Veuillez créer un employé et un client pour ouvrir cette page");
 			return "empty_page";
 		}
@@ -41,32 +41,26 @@ public class EmployeeController {
 		model.addAttribute("emps", clients);
 		return "employee";
 	}
-	
+
 	@GetMapping("/addemp")
 	public String ADDempRoute(Model model) {
 		model.addAttribute("update", false);
 		model.addAttribute("groups", groupeRepo.findAll());
 		return "addemp";
 	}
-	
+
 	@PostMapping("/e/add")
-	public String ADDClientRoutebackend(
-			@RequestParam("name") String name,
-			@RequestParam("id") String id, 
-			@RequestParam("update") String u,
-			@RequestParam("group") String g,
-			Model model
-			) {
+	public String ADDClientRoutebackend(@RequestParam("name") String name, @RequestParam("id") String id,
+			@RequestParam("update") String u, @RequestParam("group") String g, Model model) {
 		Boolean update = Boolean.parseBoolean(u);
-		if (update==false) {
-			Employes  emp1 =  new Employes(name);
+		if (update == false) {
+			Employes emp1 = new Employes(name);
 			Optional<Groupe> gps = groupeRepo.findById(Long.parseLong(g));
 			Collection<Groupe> gCollection = new ArrayList<Groupe>();
 			gCollection.add(gps.get());
 			emp1.setGroupes(gCollection);
 			employeeDAO.save(emp1);
-		}
-		else {
+		} else {
 			Long idLong = Long.parseLong(id);
 			Optional<Employes> emps = employeeDAO.findById(idLong);
 			Employes emp2 = emps.get();
@@ -79,14 +73,14 @@ public class EmployeeController {
 		}
 		return "redirect:/employee";
 	}
-	
+
 	@GetMapping("/e/remove/{id}")
 	public String RemoveEmpRoutebackend(@PathVariable String id) {
 		Long idLong = Long.parseLong(id);
 		employeeDAO.deleteById(idLong);
 		return "redirect:/employee";
 	}
-	
+
 	@GetMapping("/e/update/{id}")
 	public String UpdateEmpRoutebackend(@PathVariable String id, Model model) {
 		Long idLong = Long.parseLong(id);
@@ -99,5 +93,5 @@ public class EmployeeController {
 		model.addAttribute("update", true);
 		return "addemp";
 	}
-	
+
 }

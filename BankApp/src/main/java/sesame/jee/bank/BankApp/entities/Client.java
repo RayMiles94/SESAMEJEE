@@ -17,14 +17,15 @@ public class Client implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long codeClient;
-	
+
 	private String nomClient;
-	
+
 	@OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Collection<Compte> comptes;
 
-	public Client() {}
-	
+	public Client() {
+	}
+
 	public Client(String nomClient) {
 		super();
 		this.nomClient = nomClient;
@@ -64,5 +65,5 @@ public class Client implements Serializable {
 	public String toString() {
 		return "Client [codeClient=" + codeClient + ", nomClient=" + nomClient + ", comptes=" + comptes + "]";
 	}
-	
+
 }
