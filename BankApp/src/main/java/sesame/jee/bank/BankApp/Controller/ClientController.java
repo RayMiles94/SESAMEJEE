@@ -76,6 +76,7 @@ public class ClientController {
 		model.addAttribute("name", client.getNomClient());
 		model.addAttribute("id", client.getCodeClient());
 		model.addAttribute("update", true);
+		model.addAttribute("list", client.getComptes());
 		return "addclient";
 	}
 

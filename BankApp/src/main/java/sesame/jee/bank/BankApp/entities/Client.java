@@ -30,7 +30,6 @@ public class Client implements Serializable {
 		this.nomClient = nomClient;
 	}
 
-	
 	public Client(Long codeClientLong2, String nomClient, Collection<Compte> comptes) {
 		super();
 		this.nomClient = nomClient;

@@ -98,13 +98,41 @@
   				</div>
   				<div th:style='${ (type != null && type.equals("CC")) ?  "" : "display: none;" }' class="form-group" id="decouvertblock">
     				<label for="decouvertb">decouvert</label>
-    				<input required="false" type="number" class="form-control" 
-    				id="decouvertb" th:value='${(type != null && type == "CC") ? com.getDecouvert() : 0}' name="decouvertb" />
+    				<input required="false" 
+    						type="number" 
+    						class="form-control" 
+    						id="decouvertb" 
+    						th:value='${(type != null && type == "CC") ? com.getDecouvert() : 0}'
+    					 	name="decouvertb" />
   				</div>
+  				<br/>
   				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
         </div>
         <!--  body end  -->
+        <div class="row" th:if="(list!=null) ? true : false">
+        	<div class="col">
+        		<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Date</th>
+							<th scope="col">Montant</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:if="${list.size()>0}" th:each="o : ${list}">
+							<td th:text="${o.numeroOperation}" />
+							<td th:text="${o.dateOperation}" />
+							<td th:text="${o.montant}" />
+						</tr>
+						<tr colspan="3" th:if="${list != null &&list.size()==0}">
+							<td colspan="3" >no records</td>
+						</tr>
+					</tbody>
+				</table>
+        	</div>
+        </div>
     </div>
     <script src="http://localhost:4500/bootstrap.js"></script>
     <script>

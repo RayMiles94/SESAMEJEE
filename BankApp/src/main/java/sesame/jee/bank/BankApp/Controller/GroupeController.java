@@ -63,6 +63,7 @@ public class GroupeController {
 		model.addAttribute("name", g.getNomGroupeString());
 		model.addAttribute("update", "yes");
 		model.addAttribute("id", id);
+		model.addAttribute("list", g.getEmployes());
 		return "addgroup";
 	}
 	

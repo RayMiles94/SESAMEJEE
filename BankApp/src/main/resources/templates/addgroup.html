@@ -38,7 +38,7 @@
 			</ul>
 			<div class="form-inline my-2 my-lg-0">
 				<div>
-				<a class="nav-link" href="/dec">Déconnexion<img
+				<a class="nav-link" href="/dec">Deconnexion<img
 						src="http://localhost:4500/delete.png" alt="deconnete" height="50"
 						width="50"></a>
 				</div>
@@ -58,10 +58,33 @@
     				<label for="name">Nom de Group</label>
     				<input required name="name" type="text" class="form-control" id="name" aria-describedby="Nom" placeholder="Enter nom" th:value="${(name!=null) ? name : ''}">
   				</div> 
+  				<br/>
   				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
         </div>
         <!--  body end  -->
+        
+        <div class="row" th:if="(list!=null) ? true : false">
+        	<div class="col">
+        		<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Nom</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:if="${list.size()>0}" th:each="o : ${list}">
+							<td th:text="${o.codeEmployeLong}" />
+							<td th:text="${o.nomEmployeString}" />
+						</tr>
+						<tr colspan="3" th:if="${list != null && list.size()==0}">
+							<td colspan="3" >no records</td>
+						</tr>
+					</tbody>
+				</table>
+        	</div>
+        </div>
     </div>
     <script src="http://localhost:4500/bootstrap.js"></script>
 </body>

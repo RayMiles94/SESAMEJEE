@@ -41,6 +41,5 @@ public class LoginService {
 	public String toString() {
 		return "LoginService [login=" + login + ", password=" + password + "]";
 	}
-
-
+	
 }

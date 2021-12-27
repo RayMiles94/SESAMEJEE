@@ -45,14 +45,13 @@ public class IndexService {
 	public HashMap<String, Object> getCountofdata() {
 		HashMap<String, Object> counts = new HashMap<String, Object>();
 		counts.put("client", clientRepo.findAll().size());
-		counts.put("ep", compateEPDAO.findAll().size());
-		counts.put("cc", compteCCDAO.findAll().size());
-		counts.put("emp", clientRepo.findAll().size());
-		counts.put("ret", retraitDAO.findAll().size());
-		counts.put("ver", versementDAO.findAll().size());
+		counts.put("ep"    , compateEPDAO.findAll().size());
+		counts.put("cc"    , compteCCDAO.findAll().size());
+		counts.put("emp"   , clientRepo.findAll().size());
+		counts.put("ret"   , retraitDAO.findAll().size());
+		counts.put("ver"   , versementDAO.findAll().size());
 		counts.put("groups", groupeRepo.findAll().size());
 		return counts;
 	}
-	
 	
 }

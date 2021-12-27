@@ -45,7 +45,7 @@
 			</ul>
 			<div class="form-inline my-2 my-lg-0">
 				<div>
-				<a class="nav-link" href="/dec">Déconnexion<img
+					<a class="nav-link" href="/dec">Déconnexion<img
 						src="http://localhost:4500/delete.png" alt="deconnete" height="50"
 						width="50"></a>
 				</div>
@@ -71,8 +71,32 @@
 						type="text" class="form-control" id="name" aria-describedby="Nom"
 						placeholder="Enter nom" th:value="${name}">
 				</div>
+				<br />
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
+		</div>
+		<div class="row" th:if="${(list!=null) ? true : false}">
+			<div class="col">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Date</th>
+							<th scope="col">Montant</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:if="${list.size()>0}" th:each="o : ${list}">
+							<td th:text="${o.codeCompte}" />
+							<td th:text="${o.dateCreation}" />
+							<td th:text="${o.solde}" />
+						</tr>
+						<tr colspan="3" th:if="${list != null && list.size()==0}">
+							<td colspan="3" th:text="no records" />
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 		<!--  body end  -->
 	</div>
